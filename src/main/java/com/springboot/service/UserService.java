@@ -9,17 +9,15 @@ public interface UserService {
 
 	User findById(Long id)  throws ResourceNotFound;
 	
-	User findByName(String name)  throws ResourceNotFound;
+	boolean deleteById(Long id) ;
 	
-	boolean deleteById(Long id) throws ResourceNotFound;
+	User UpdateUser(User user) throws Exception;
 	
-	boolean UpdateUser(User user) throws Exception;
-	
-	boolean saveUser(User user) throws ResourceNotFound;
+	User saveUser(User user) throws ResourceNotFound;
 	
 	List<User> findAll() throws Exception;
 	
-	boolean DeleteAllUsers() throws Exception;
+	void DeleteAllUsers() throws Exception;
 	
 	boolean IsUserExist(User user) throws Exception;
 	

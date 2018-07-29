@@ -1,5 +1,6 @@
 package com.springboot.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,64 +9,51 @@ import com.springboot.customexception.ResourceNotFound;
 import com.springboot.model.User;
 import com.springboot.repositories.UserRepository;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
-	
+
 	@Override
 	public User findById(Long id) throws ResourceNotFound {
-		// TODO Auto-generated method stub
-		userRepository.findById(id);
-		return null;
+		return userRepository.findById(id).orElseThrow(() -> new ResourceNotFound("User", "User ID", id));
 	}
 
 	@Override
-	public User findByName(String name) throws ResourceNotFound {
-		// TODO Auto-generated method stub
-		
-		return null;
+	public boolean deleteById(Long id) {
+
+		userRepository.delete(findById(id));
+		return true;
 	}
 
 	@Override
-	public boolean deleteById(Long id) throws ResourceNotFound {
-		// TODO Auto-generated method stub
-		userRepository.deleteById(id);
-		return false;
+	public User UpdateUser(User user) throws Exception {
+
+		return userRepository.saveAndFlush(findById(user.getUserId()));
 	}
 
 	@Override
-	public boolean UpdateUser(User user) throws Exception {
-		// TODO Auto-generated method stub
-		userRepository.saveAndFlush(user);
-		return false;
-	}
+	public User saveUser(User user) throws ResourceNotFound {
 
-	@Override
-	public boolean saveUser(User user) throws ResourceNotFound {
-		// TODO Auto-generated method stub
-		userRepository.saveAndFlush(user);
-		return false;
+		return userRepository.saveAndFlush(user);
 	}
 
 	@Override
 	public List<User> findAll() throws Exception {
-		// TODO Auto-generated method stub
-		
+
 		return userRepository.findAll();
 	}
 
 	@Override
-	public boolean DeleteAllUsers() throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public void DeleteAllUsers() throws Exception {
+
+		userRepository.deleteAll();
 	}
 
 	@Override
 	public boolean IsUserExist(User user) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return userRepository.findById(user.getUserId()).isPresent();
 	}
 
 }
