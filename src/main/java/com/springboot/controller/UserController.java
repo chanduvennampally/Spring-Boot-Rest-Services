@@ -32,7 +32,7 @@ public class UserController {
 			User user = userService.findById(id);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (ResourceNotFound e) {
-			return new ResponseEntity<User>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<User>( HttpStatus.NO_CONTENT);
 		}
 		
 	}
