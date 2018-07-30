@@ -22,7 +22,6 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 
-	@Id
 	@Column(name = "ROLE_ID", nullable = false)
 	private Long roleId;
 
@@ -32,7 +31,7 @@ public class User implements Serializable {
 
 	@NotBlank
 	@Column(name = "EMAIL", nullable = false)
-	private double email;
+	private String email;
 
 	@Column(name = "AGE", nullable = false)
 	private int age;
@@ -40,8 +39,11 @@ public class User implements Serializable {
 	@Column(name = "SALARY", nullable = false)
 	private double salary;
 
-	public User(Long userId, Long roleId, @NotBlank String name, @NotBlank double email, int age, double salary) {
-		super();
+	public User() {
+
+	}
+
+	public User(Long userId, Long roleId, @NotBlank String name, @NotBlank String email, int age, double salary) {
 		this.userId = userId;
 		this.roleId = roleId;
 		this.name = name;
@@ -74,11 +76,11 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public double getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(double email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
