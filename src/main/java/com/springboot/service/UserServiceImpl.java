@@ -25,14 +25,14 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean deleteById(Long id) {
 
-		userRepository.delete(findById(id));
+		userRepository.deleteById(id);
 		return true;
 	}
 
 	@Override
 	public User UpdateUser(User user) throws Exception {
 
-		return userRepository.saveAndFlush(findById(user.getUserId()));
+		return userRepository.saveAndFlush(user);
 	}
 
 	@Override
