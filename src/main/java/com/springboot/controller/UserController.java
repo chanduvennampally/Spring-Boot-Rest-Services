@@ -57,14 +57,14 @@ public class UserController {
 		}
 	}
 
-	// delete by id
+		// delete by id
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteUserById(@PathVariable(value = "id") Long id) {
 		User user = null;
 		try {
-		user = userService.findById(id);
+			user = userService.findById(id);
 		} catch (ResourceNotFound e) {
-			return new ResponseEntity<User>( HttpStatus.NOT_FOUND);
+			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 		userService.deleteById(id);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -104,7 +104,7 @@ public class UserController {
 	// create user
 	@PostMapping("/create")
 	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-		
+
 		return new ResponseEntity<User>(userService.saveUser(user), HttpStatus.OK);
 	}
 
